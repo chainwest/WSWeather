@@ -10,17 +10,12 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+class ViewController: UIViewController {
     
-    let url = "http://api.weatherstack.com/current"
-    let API_KEY = "cc582b9dafedbba713265ccf73342c2f"
-    let cities = ["Tomsk", "Paris", "Seattle", "Amsterdam"]
-    
-    var weatherData = WeatherModel()
+    var weatherData = WeatherModel.init(cityName: "", temperature: 0)
 
     @IBOutlet weak var weatherLabel: UILabel!
     @IBOutlet weak var cityPicker: UIPickerView!
-    @IBOutlet weak var weatherIcon: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +34,10 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
                 
                 let weatherJSON: JSON = JSON(response.result.value!)
                 
-                print(weatherJSON)
-                
                 self.parseJSON(data: weatherJSON)
             } else {
+                print("Connection issues.")
+                
                 self.weatherLabel.text = "Connection issues."
             }
         }
@@ -53,7 +48,6 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     func parseJSON(data: JSON) {
         weatherData.cityName = data["location"]["name"].string!
         weatherData.temperature = data["current"]["temperature"].doubleValue
-        weatherData.weatherDescriptions = data["current"]["weather_descriptions"][0].string!
         
         updateUI()
     }
@@ -61,40 +55,38 @@ class ViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSo
     //MARK: - Update UI
     func updateUI() {
         weatherLabel.text = String(weatherData.temperature)
-        
-        switch weatherData.weatherDescriptions {
-        case "Mist":
-            weatherIcon.image = UIImage(systemName: "cloud.fog")
-        case "Sunny":
-            weatherIcon.image = UIImage(systemName: "sun.max")
-        case "Rain":
-            weatherIcon.image = UIImage(systemName: "cloud.rain")
-        default:
-            weatherIcon.image = UIImage(systemName: "cloud.fill")
-        }
+    }
+
+}
+
+//MARK: - UIPickerView Delegate
+extension ViewController: UIPickerViewDelegate {
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return Constants.cities[row]
     }
     
-    //MARK: - UIPickerView Methods
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        let parameters = [
+            "access_key" : Constants.API_KEY,
+            "query" : Constants.cities[row]
+        ]
+        
+        getWeatherData(url: Constants.url, params: parameters)
+    }
+    
+}
+
+//MARK: - UIPickerView DataSource
+extension ViewController: UIPickerViewDataSource {
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return cities.count
+        return Constants.cities.count
     }
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return cities[row]
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        let parameters = [
-            "access_key" : API_KEY,
-            "query" : cities[row]
-        ]
-        
-        getWeatherData(url: url, params: parameters)
-    }
-
 }
 

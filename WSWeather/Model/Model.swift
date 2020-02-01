@@ -8,14 +8,12 @@
 
 import Foundation
 
-class WeatherModel {
+struct WeatherModel: Decodable {
     var cityName: String
     var temperature: Double
-    var weatherDescriptions: String
     
-    init() {
-        cityName = ""
-        temperature = 0
-        weatherDescriptions = ""
+    enum CodingKeys: String, CodingKey {
+        case cityName
+        case temperature
     }
 }
