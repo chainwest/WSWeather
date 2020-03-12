@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct WeatherModel: Decodable {
+struct WeatherModel: Codable {
     var cityName: String
     var temperature: Double
     

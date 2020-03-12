@@ -26,26 +26,19 @@ class ViewController: UIViewController {
 
     //MARK: - Networking
     func getWeatherData(url: String, params: [String : String]) {
-        
-        Alamofire.request(url, method: .get, parameters: params).responseJSON {
-            response in
-            if response.result.isSuccess {
-                print("Success! Data has fetched.")
-                
-                let weatherJSON: JSON = JSON(response.result.value!)
-                
-                self.parseJSON(data: weatherJSON)
-            } else {
-                print("Connection issues.")
-                
-                self.weatherLabel.text = "Connection issues."
+        AF.request(Constants.url, method: .get, parameters: params).responseJSON { response in
+            switch response.result {
+            case .success(let data):
+                let json: JSON = JSON(data)
+                self.parseJSON(json)
+            case .failure(let error):
+                print(error)
             }
         }
-        
     }
     
     //MARK: - Parsing data
-    func parseJSON(data: JSON) {
+    func parseJSON(_ data: JSON) {
         weatherData.cityName = data["location"]["name"].string!
         weatherData.temperature = data["current"]["temperature"].doubleValue
         

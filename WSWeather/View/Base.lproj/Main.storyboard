@@ -15,27 +15,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EaM-C1-aRa">
-                                <rect key="frame" x="0.0" y="522" width="414" height="209"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                            </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Weather" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1P0-2k-8n8">
                                 <rect key="frame" x="20" y="81" width="115.5" height="36"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="30"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="-1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5k-RZ-qXb">
-                                <rect key="frame" x="0.0" y="264" width="414" height="110"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5k-RZ-qXb">
+                                <rect key="frame" x="184" y="367" width="47" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EaM-C1-aRa">
+                                <rect key="frame" x="0.0" y="597" width="414" height="209"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="EaM-C1-aRa" secondAttribute="height" multiplier="414:209" id="xnE-zi-p8b"/>
+                                </constraints>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="E5k-RZ-qXb" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-64.5" id="3MU-Fl-obj"/>
+                            <constraint firstItem="E5k-RZ-qXb" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="RSn-lZ-Vuf"/>
+                            <constraint firstItem="EaM-C1-aRa" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Xkr-bK-i8i"/>
+                            <constraint firstItem="EaM-C1-aRa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="gql-JJ-frI"/>
                             <constraint firstItem="1P0-2k-8n8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="37" id="jkC-st-AS7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="EaM-C1-aRa" secondAttribute="bottom" constant="56" id="l3s-ly-jFN"/>
                             <constraint firstItem="1P0-2k-8n8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="t8R-eG-DdL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
