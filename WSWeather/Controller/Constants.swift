@@ -10,7 +10,7 @@ import Foundation
 
 enum Constants {
     static let url = "http://api.weatherstack.com/current"
-    static let API_KEY = "type your key here"
+    static let API_KEY = "cc582b9dafedbba713265ccf73342c2f"
     static let cities = ["Tomsk", "Paris", "Seattle", "Amsterdam"]
 }
 

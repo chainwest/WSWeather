@@ -32,6 +32,10 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EaM-C1-aRa" secondAttribute="height" multiplier="414:209" id="xnE-zi-p8b"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="tU3-4m-ZbG"/>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="mO9-Z8-Vr1"/>
+                                </connections>
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>

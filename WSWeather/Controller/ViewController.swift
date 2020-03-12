@@ -20,8 +20,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        cityPicker.delegate = self
-        cityPicker.dataSource = self
     }
 
     //MARK: - Networking
@@ -30,6 +28,7 @@ class ViewController: UIViewController {
             switch response.result {
             case .success(let data):
                 let json: JSON = JSON(data)
+                print(json)
                 self.parseJSON(json)
             case .failure(let error):
                 print(error)
