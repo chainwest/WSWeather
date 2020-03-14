@@ -7,46 +7,28 @@
 //
 
 import UIKit
-import Alamofire
-import SwiftyJSON
 
 class ViewController: UIViewController {
     
-    var weatherData = WeatherModel.init(cityName: "", temperature: 0)
+    let apiService = ApiService()
 
     @IBOutlet weak var weatherLabel: UILabel!
-    @IBOutlet weak var cityPicker: UIPickerView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
-
-    //MARK: - Networking
-    func getWeatherData(url: String, params: [String : String]) {
-        AF.request(Constants.url, method: .get, parameters: params).responseJSON { response in
-            switch response.result {
-            case .success(let data):
-                let json: JSON = JSON(data)
-                print(json)
-                self.parseJSON(json)
-            case .failure(let error):
-                print(error)
-            }
+    @IBOutlet weak var cityPicker: UIPickerView! {
+        didSet {
+            cityPicker.delegate = self
+            cityPicker.dataSource = self
         }
     }
     
-    //MARK: - Parsing data
-    func parseJSON(_ data: JSON) {
-        weatherData.cityName = data["location"]["name"].string!
-        weatherData.temperature = data["current"]["temperature"].doubleValue
-        
-        updateUI()
+    override func viewDidLoad() {
+        super.viewDidLoad()
     }
-    
+
     //MARK: - Update UI
-    func updateUI() {
-        weatherLabel.text = String(weatherData.temperature)
+    func updateUI(_ data: WeatherModel) {
+        let result = String(data.current.temperature)
+        weatherLabel.text = result
     }
 
 }
@@ -59,12 +41,21 @@ extension ViewController: UIPickerViewDelegate {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
         let parameters = [
             "access_key" : Constants.API_KEY,
             "query" : Constants.cities[row]
         ]
         
-        getWeatherData(url: Constants.url, params: parameters)
+        apiService.getWeatherByCity(parameters: parameters) { result in
+            switch result {
+            case .success(let data):
+                self.updateUI(data)
+            case .failure(let error):
+                print(error)
+            }
+        }
+        
     }
     
 }

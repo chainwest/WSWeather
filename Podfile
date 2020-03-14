@@ -7,7 +7,6 @@ target 'WSWeather' do
 
   # Pods for WSWeather
   
-  pod 'SwiftyJSON'
   pod 'Alamofire'
 
 end

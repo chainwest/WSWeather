@@ -8,12 +8,10 @@
 
 import Foundation
 
-struct WeatherModel: Codable {
-    var cityName: String
+struct Current: Codable {
     var temperature: Double
-    
-    enum CodingKeys: String, CodingKey {
-        case cityName
-        case temperature
-    }
+}
+
+struct WeatherModel: Codable {
+    var current: Current
 }

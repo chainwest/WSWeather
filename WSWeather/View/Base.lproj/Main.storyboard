@@ -22,7 +22,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-1.0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E5k-RZ-qXb">
-                                <rect key="frame" x="184" y="367" width="47" height="33"/>
+                                <rect key="frame" x="183.5" y="367" width="47" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -32,10 +32,6 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="EaM-C1-aRa" secondAttribute="height" multiplier="414:209" id="xnE-zi-p8b"/>
                                 </constraints>
-                                <connections>
-                                    <outlet property="dataSource" destination="BYZ-38-t0r" id="tU3-4m-ZbG"/>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="mO9-Z8-Vr1"/>
-                                </connections>
                             </pickerView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
